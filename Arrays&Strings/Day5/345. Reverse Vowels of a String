@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string reverseVowels(string s) {
+       int l=0, r=s.size()-1;
+     unordered_map<char,int> mp;
+        string t="aeiouAEIOU";
+        for(auto i:t){
+            mp[i]++;
+        }
+        while(l<r){
+            if(mp.find(s[l])!=mp.end()&&mp.find(s[r])!=mp.end()){
+                swap(s[l++],s[r--]);
+            }else if(mp.find(s[l])==mp.end()){
+                l++;
+            }
+            else if(mp.find(s[r])==mp.end()){
+                r--;
+            }
+ 
+            
+        }
+        return s;
+    }
+};
