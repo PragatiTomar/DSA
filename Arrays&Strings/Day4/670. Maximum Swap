@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maximumSwap(int num) {
+     string str=to_string(num);
+     int arr[str.size()]; 
+     int g=str.size()-1;
+      arr[str.size()-1]=g;  
+     for(int i=str.size()-2; i>=0; i--){
+         if(str[i]>str[g]){
+             g=i;
+         }
+         arr[i]=g;
+     }  
+        for(int i=0; i<str.size();i++){
+            if(str[i]!=str[arr[i]]){
+                swap(str[i],str[arr[i]]);
+                break;
+            }
+            
+        }
+        int v=stoi(str);
+        return v;
+        
+    }
+};
