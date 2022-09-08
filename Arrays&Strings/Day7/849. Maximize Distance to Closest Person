@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+       int zeroes=0,max_zeroes=-1, pre=-1,post=-1;
+        for(int i=0;i<seats.size();i++){
+            if(seats[i]==0){
+                zeroes++;
+            }else{
+                if(pre==-1){
+                    pre=zeroes;
+                }else{
+                    max_zeroes=max(max_zeroes,zeroes);
+                }
+                zeroes=0;
+            }
+        }
+        post=zeroes;
+        return max(max(pre,post),(max_zeroes+1)/2);
+        
+    }
+};
