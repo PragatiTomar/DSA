@@ -1,0 +1,89 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& arr) {
+        
+        int n = arr.size();
+        
+        // declare a stack
+        
+        stack<int> st;
+        
+        for(int i = 0; i < n; i++)
+        {
+            // if aesteroid is moving in right direction simply push into stack
+            
+            if(arr[i] > 0)
+            {
+                st.push(arr[i]);
+            }
+            
+            // if aesteroid is moving in left direction then we have multiple cases
+            
+            else if(arr[i] < 0)
+            {
+                bool flag = true;
+                
+                while(st.empty() == false) 
+                {
+                    // if aesteroid at top is also moving in left direction
+                    
+                    if(st.top() < 0)
+                    {
+                        break;
+                    }
+                    
+                    // if aesteroid at top is moving in right direction and has abs value less than abs(arr[i])
+                    
+                    else if(st.top() < abs(arr[i]))
+                    {
+                        st.pop();
+                    }
+                    
+                    // if aesteroid at top is moving in right direction and has abs value equal to abs(arr[i])
+                    
+                    else if(st.top() == abs(arr[i]))
+                    {
+                        flag = false;
+                        
+                        st.pop();
+                        
+                        break;
+                    }
+                    
+                    // if aesteroid at top is moving in right direction and has abs value greater than abs(arr[i])
+                    
+                    else
+                    {
+                        flag = false;
+                        
+                        break;
+                    }
+                }
+                
+                // if left moving aesteroid is not distroyed then push into stack
+                
+                if(flag)
+                {
+                    st.push(arr[i]);
+                }
+            }
+        }
+        
+        // now push the remaining aesteroids into res
+        
+        vector<int> res;
+        
+        while(st.empty() == false)
+        {
+            res.push_back(st.top());
+            
+            st.pop();
+        }
+        
+        // reverse the res
+        
+        reverse(res.begin(), res.end());
+        
+        return res;
+    }
+};
